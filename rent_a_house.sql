@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.4
+-- version 4.8.0.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 02, 2021 at 06:14 PM
--- Server version: 10.4.17-MariaDB
--- PHP Version: 7.2.34
+-- Generation Time: Jun 12, 2022 at 04:44 PM
+-- Server version: 10.1.32-MariaDB
+-- PHP Version: 7.2.5
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -75,15 +76,18 @@ CREATE TABLE `bookings` (
   `renter_id` int(11) NOT NULL,
   `booking_status` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'requested',
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `house_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `bookings`
 --
 
-INSERT INTO `bookings` (`id`, `address`, `rent`, `leave`, `landlord_id`, `renter_id`, `booking_status`, `created_at`, `updated_at`) VALUES
-(2, 'Calico', 7000, NULL, 8, 4, 'requested', '2021-11-02 17:05:51', '2021-11-02 17:05:51');
+INSERT INTO `bookings` (`id`, `address`, `rent`, `leave`, `landlord_id`, `renter_id`, `booking_status`, `created_at`, `updated_at`, `house_id`) VALUES
+(2, 'Calico', 7000, NULL, 8, 4, 'requested', '2021-11-02 17:05:51', '2021-11-02 17:05:51', 0),
+(3, 'Radhanagar , Road no-2', 8000, NULL, 15, 25, 'requested', '2022-06-12 14:28:51', '2022-06-12 14:28:51', 11),
+(4, 'Ononto Bazar', 7000, NULL, 14, 25, 'requested', '2022-06-12 14:31:15', '2022-06-12 14:31:15', 10);
 
 -- --------------------------------------------------------
 
@@ -97,7 +101,7 @@ CREATE TABLE `failed_jobs` (
   `queue` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
   `exception` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `failed_at` timestamp NOT NULL DEFAULT current_timestamp()
+  `failed_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -128,17 +132,17 @@ CREATE TABLE `houses` (
 --
 
 INSERT INTO `houses` (`id`, `address`, `area_id`, `user_id`, `contact`, `number_of_room`, `number_of_toilet`, `number_of_belcony`, `rent`, `featured_image`, `images`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'Rup Kothar goli , Road no. 2.', 10, 5, '8801734534968', 4, 2, 2, 8000, '2021-11-02-61815dfd05165.jfif', '[\"1635868157-61815dfd17b64.jpg\",\"1635868157-61815dfd191b2.jpg\"]', '1', '2021-11-02 15:49:17', '2021-11-02 15:49:17'),
+(1, 'Rup Kothar goli , Road no. 2.', 10, 5, '8801734534968', 4, 2, 2, 8500, '2021-11-02-61815dfd05165.jfif', '[\"1635868157-61815dfd17b64.jpg\",\"1635868157-61815dfd191b2.jpg\"]', '1', '2021-11-02 15:49:17', '2021-11-02 15:49:17'),
 (2, 'Bakshi Para , Road no. - 3', 1, 6, '01744534968', 2, 1, 1, 5000, '2021-11-02-61815eb25526e.jpg', '[\"1635868338-61815eb273123.jpg\",\"1635868338-61815eb274516.jpg\"]', '1', '2021-11-02 15:52:18', '2021-11-02 15:52:18'),
-(3, 'Rajapur', 2, 7, '01735534968', 3, 1, 2, 6000, '2021-11-02-61815f263d3aa.jpg', '[\"1635868454-61815f266f38c.jpg\",\"1635868454-61815f2670b2b.jpg\"]', '1', '2021-11-02 15:54:14', '2021-11-02 15:54:46'),
-(4, 'Calico', 3, 8, '01734534968', 2, 2, 1, 7000, '2021-11-02-6181609a4c3fe.jpg', '[\"1635868826-6181609a5d0c1.jpg\",\"1635868826-6181609a5d909.jpg\"]', '0', '2021-11-02 16:00:26', '2021-11-02 17:05:51'),
-(5, 'Bypass Terminal', 4, 9, '01734544968', 3, 2, 1, 7000, '2021-11-02-618161cdf3fe2.jpg', '[\"1635869134-618161ce1144e.jpg\",\"1635869134-618161ce1251e.jpg\",\"1635869134-618161ce14a50.jpg\"]', '1', '2021-11-02 16:05:34', '2021-11-02 16:05:34'),
-(6, 'Monsurabad , Road no. 1', 5, 10, '01734537968', 3, 2, 1, 7000, '2021-11-02-61816329d1881.jpg', '[\"1635869481-61816329e1340.jpg\",\"1635869481-61816329e1e7a.jpg\"]', '1', '2021-11-02 16:11:21', '2021-11-02 16:11:21'),
-(7, 'Purbo Shalgaria', 6, 11, '01734534068', 3, 1, 1, 6000, '2021-11-02-6181641567ece.jpg', '[\"1635869717-61816415784a2.jpg\",\"1635869717-61816415791e0.jpg\"]', '1', '2021-11-02 16:15:17', '2021-11-02 16:15:17'),
-(8, 'Bangla Clinic Mor', 9, 12, '01730007968', 5, 2, 1, 6000, '2021-11-02-6181653b656a5.jpg', '[\"1635870011-6181653b80c73.jpg\",\"1635870011-6181653b81eba.jpg\",\"1635870011-6181653b82ee2.jpg\",\"1635870011-6181653b842df.jpg\"]', '1', '2021-11-02 16:20:11', '2021-11-02 16:20:11'),
-(9, 'Meril Bypass, Road no-1', 13, 13, '01864534068', 3, 2, 1, 6000, '2021-11-02-6181664c90cf5.jpg', '[\"1635870284-6181664ca33b3.jpg\",\"1635870284-6181664ca45e4.jpg\"]', '1', '2021-11-02 16:24:44', '2021-11-02 16:24:44'),
-(10, 'Ononto Bazar', 15, 14, '01534534968', 4, 2, 1, 7000, '2021-11-02-618166b3507eb.jpg', '[\"1635870387-618166b361fbd.jpg\",\"1635870387-618166b362aa3.jpg\",\"1635870387-618166b3637bd.jpg\"]', '1', '2021-11-02 16:26:27', '2021-11-02 16:26:27'),
-(11, 'Radhanagar , Road no-2', 11, 15, '01634534968', 5, 2, 1, 8000, '2021-11-02-618167cfd9aca.jpg', '[\"1635870671-618167cfe9f0b.jpg\",\"1635870671-618167cfeaa71.jpg\",\"1635870671-618167cfeb398.jpg\",\"1635870671-618167cfebc71.jpg\"]', '1', '2021-11-02 16:31:11', '2021-11-02 16:31:11');
+(3, 'Rajapur', 2, 7, '01735534968', 3, 1, 2, 7100, '2021-11-02-61815f263d3aa.jpg', '[\"1635868454-61815f266f38c.jpg\",\"1635868454-61815f2670b2b.jpg\"]', '1', '2021-11-02 15:54:14', '2021-11-02 15:54:46'),
+(4, 'Calico', 3, 8, '01734534968', 2, 2, 1, 7200, '2021-11-02-6181609a4c3fe.jpg', '[\"1635868826-6181609a5d0c1.jpg\",\"1635868826-6181609a5d909.jpg\"]', '0', '2021-11-02 16:00:26', '2021-11-02 17:05:51'),
+(5, 'Bypass Terminal', 4, 9, '01734544968', 3, 2, 1, 7500, '2021-11-02-618161cdf3fe2.jpg', '[\"1635869134-618161ce1144e.jpg\",\"1635869134-618161ce1251e.jpg\",\"1635869134-618161ce14a50.jpg\"]', '1', '2021-11-02 16:05:34', '2021-11-02 16:05:34'),
+(6, 'Monsurabad , Road no. 1', 5, 10, '01734537968', 3, 2, 1, 7700, '2021-11-02-61816329d1881.jpg', '[\"1635869481-61816329e1340.jpg\",\"1635869481-61816329e1e7a.jpg\"]', '1', '2021-11-02 16:11:21', '2021-11-02 16:11:21'),
+(7, 'Purbo Shalgaria', 6, 11, '01734534068', 3, 1, 1, 6500, '2021-11-02-6181641567ece.jpg', '[\"1635869717-61816415784a2.jpg\",\"1635869717-61816415791e0.jpg\"]', '1', '2021-11-02 16:15:17', '2021-11-02 16:15:17'),
+(8, 'Bangla Clinic Mor', 9, 12, '01730007968', 5, 2, 1, 6400, '2021-11-02-6181653b656a5.jpg', '[\"1635870011-6181653b80c73.jpg\",\"1635870011-6181653b81eba.jpg\",\"1635870011-6181653b82ee2.jpg\",\"1635870011-6181653b842df.jpg\"]', '1', '2021-11-02 16:20:11', '2021-11-02 16:20:11'),
+(9, 'Meril Bypass, Road no-1', 13, 13, '01864534068', 3, 2, 1, 6200, '2021-11-02-6181664c90cf5.jpg', '[\"1635870284-6181664ca33b3.jpg\",\"1635870284-6181664ca45e4.jpg\"]', '1', '2021-11-02 16:24:44', '2021-11-02 16:24:44'),
+(10, 'Ononto Bazar', 15, 14, '01534534968', 4, 2, 1, 7900, '2021-11-02-618166b3507eb.jpg', '[\"1635870387-618166b361fbd.jpg\",\"1635870387-618166b362aa3.jpg\",\"1635870387-618166b3637bd.jpg\"]', '0', '2021-11-02 16:26:27', '2022-06-12 14:31:15'),
+(11, 'Radhanagar , Road no-2', 11, 15, '01634534968', 5, 2, 1, 8200, '2021-11-02-618167cfd9aca.jpg', '[\"1635870671-618167cfe9f0b.jpg\",\"1635870671-618167cfeaa71.jpg\",\"1635870671-618167cfeb398.jpg\",\"1635870671-618167cfebc71.jpg\"]', '0', '2021-11-02 16:31:11', '2022-06-12 14:28:51');
 
 -- --------------------------------------------------------
 
@@ -224,7 +228,7 @@ INSERT INTO `roles` (`id`, `name`, `slug`, `created_at`, `updated_at`) VALUES
 
 CREATE TABLE `users` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `role_id` int(11) NOT NULL DEFAULT 2,
+  `role_id` int(11) NOT NULL DEFAULT '2',
   `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `username` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `nid` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -265,7 +269,8 @@ INSERT INTO `users` (`id`, `role_id`, `name`, `username`, `nid`, `contact`, `ema
 (21, 3, 'Rejaul', 'rejaul', '1996065321987', '01734536068', 'rejaul@gmail.com', '2021-11-02-618169b75f354.jpg', '$2y$10$H1jqdkAD6OMhGLHYyc3LIebaR9hEHs.8TTkQDnCLq1//xx6rCFtBe', NULL, '2021-11-02 15:43:17', '2021-11-02 16:39:19'),
 (22, 3, 'Redwan', 'redwan', '1996765651987', '01734534000', 'redwan@gmail.com', '2021-11-02-61816898e38f2.jpg', '$2y$10$qJOHKNMygIrUCIoo1A3u5OLYoYCwGMBNBM4DaZNx8qrnSvB6wDmLC', NULL, '2021-11-02 15:44:08', '2021-11-02 16:34:33'),
 (23, 3, 'Mou', 'mou', '7350030509', '01666621334', 'mou@gmail.com', '2021-11-02-6181691ff1885.jpg', '$2y$10$CvpcWf/pvU/Baf9fcwVdmuxRXq69pdjPSE7yyBAzHiVg02fiFB/VS', NULL, '2021-11-02 16:35:27', '2021-11-02 16:36:48'),
-(24, 3, 'Munna', 'munna-at-gmailcom', '19979320008000069', '01934534000', 'munna@gmail.com', '2021-11-02-61816bfa638d9.jpg', '$2y$10$j.l7lzlonTPvTM3Wc/5e1OFfXPRRVH6kFnIcZDR8biE8FXDZWUazW', NULL, '2021-11-02 16:48:40', '2021-11-02 16:48:58');
+(24, 3, 'Munna', 'munna-at-gmailcom', '19979320008000069', '01934534000', 'munna@gmail.com', '2021-11-02-61816bfa638d9.jpg', '$2y$10$j.l7lzlonTPvTM3Wc/5e1OFfXPRRVH6kFnIcZDR8biE8FXDZWUazW', NULL, '2021-11-02 16:48:40', '2021-11-02 16:48:58'),
+(25, 3, 'test', 'maruf', '32996692', '1742978449', 'test@gmail.com', NULL, '$2y$10$eQzKrBInkK28oCqGWeCS4u7DAQRHzOFrz.1orhvLU0e38CjnOWeuy', NULL, '2022-06-12 14:27:46', '2022-06-12 14:27:46');
 
 --
 -- Indexes for dumped tables
@@ -343,7 +348,7 @@ ALTER TABLE `areas`
 -- AUTO_INCREMENT for table `bookings`
 --
 ALTER TABLE `bookings`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
@@ -379,7 +384,7 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -16,7 +16,7 @@
                             <a class="btn btn-danger" href="<?php echo e(route('welcome')); ?>"> Back</a>
 
                             <?php if(auth()->guard()->guest()): ?>
-                            <a href="" onclick="guestBooking()" class="btn btn-info">Apply for booking</a>
+                            <a href="/login" class="btn btn-info">Apply for booking</a>
                             <?php else: ?>
 
                             <?php if(Auth::user()->role_id == 3): ?>

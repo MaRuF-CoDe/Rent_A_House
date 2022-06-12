@@ -18,7 +18,7 @@
                             <a class="btn btn-danger" href="{{ route('welcome') }}"> Back</a>
 
                             @guest
-                            <a href="" onclick="guestBooking()" class="btn btn-info">Apply for booking</a>
+                            <a href="/login" class="btn btn-info">Apply for booking</a>
                             @else
 
                             @if (Auth::user()->role_id == 3)
